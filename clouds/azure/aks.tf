@@ -2,6 +2,7 @@ module "aks" {
   source = "Azure/aks/azurerm"
   version = "7.5.0"
 
+  kubernetes_version  = "1.27.3"
   cluster_name        = var.cluster_name
   resource_group_name = local.resource_group.name
   os_disk_size_gb     = 60
