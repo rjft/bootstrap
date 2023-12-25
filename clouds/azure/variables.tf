@@ -37,3 +37,8 @@ variable "postgres_name" {
   type = string
   default = "plural"
 }
+
+variable "install_runtime" {
+  type = bool
+  default = true
+}
