@@ -22,3 +22,11 @@ metadata:
 spec:
   interval: 5m0s
   url: https://pluralsh.github.io/console
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bootstrap
+spec:
+  interval: 5m0s
+  url: https://pluralsh.github.io/bootstrap
