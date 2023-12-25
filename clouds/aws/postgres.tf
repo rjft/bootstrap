@@ -1,3 +1,11 @@
+resource "random_password" "password" {
+  length      = 20
+  min_lower   = 1
+  min_numeric = 1
+  min_special = 1
+  min_upper   = 1
+}
+
 module "db" {
   source = "terraform-aws-modules/rds/aws"
 
@@ -10,8 +18,9 @@ module "db" {
   instance_class       = "db.t4g.large"
   allocated_storage    = 20
 
-  db_name  = "plural"
+  db_name  = "console"
   username = "console"
+  password = random_password.password.result
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
