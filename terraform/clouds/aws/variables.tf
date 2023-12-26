@@ -3,7 +3,7 @@ variable "cluster_name" {
     default = "plural"
 }
 
-variable "cluster_version" {
+variable "kubernetes_version" {
     type = string
     default = "1.27"
 }
@@ -36,4 +36,14 @@ variable "public_subnets" {
 variable "install_runtime" {
   type = bool
   default = true
+}
+
+variable "deletion_protection" {
+  type = bool
+  default = true
+}
+
+variable "runtime_values_file" {
+  type = string
+  default = "../../helm-values/runtime.yaml"
 }

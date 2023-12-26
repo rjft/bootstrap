@@ -3,6 +3,11 @@ variable "cluster_name" {
     default = "plural"
 }
 
+variable "kubernetes_version" {
+  type = string
+  default = "1.27.3"
+}
+
 variable "create_resource_group" {
     type = bool
     default = true
@@ -41,4 +46,9 @@ variable "postgres_name" {
 variable "install_runtime" {
   type = bool
   default = true
+}
+
+variable "runtime_values_file" {
+  type = string
+  default = "../../helm-values/runtime.yaml"
 }

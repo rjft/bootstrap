@@ -11,6 +11,6 @@ output "db" {
 }
 
 output "db_url" {
-    value = format("postgresql://console:%s@%s:5432/console", random_password.password.result, module.postgresql.server_fqdn)
+    value = local.db_url
     sensitive = true
 }

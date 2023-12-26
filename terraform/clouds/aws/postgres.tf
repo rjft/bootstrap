@@ -48,7 +48,7 @@ module "db" {
   ]
 
   # Database Deletion Protection
-  deletion_protection = true
+  deletion_protection = var.deletion_protection
 }
 
 module "security_group" {

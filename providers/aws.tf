@@ -1,6 +1,12 @@
 terraform {
   required_version = ">= 1.0"
 
+  backend "s3" {
+    bucket = "{{ .Bucket }}"
+    key = "{{ .Cluster }}/terraform.tfstate"
+    region = "{{ .Region }}"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -22,5 +28,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  region = "{{ .Region }}"
 }

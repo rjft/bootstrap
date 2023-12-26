@@ -3,6 +3,16 @@ variable "cluster_name" {
   default = "plural"
 }
 
+variable "deletion_protection" {
+  type = bool
+  default = true
+}
+
+variable "kubernetes_version" {
+  type = string
+  default = "1.27.3-gke.100"
+}
+
 variable "project_id" {
   type = string
 }
@@ -40,4 +50,9 @@ variable "db_name" {
 variable "install_runtime" {
   type = bool
   default = true
+}
+
+variable "runtime_values_file" {
+  type = string
+  default = "../../helm-values/runtime.yaml"
 }

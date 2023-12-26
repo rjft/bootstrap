@@ -1,5 +1,13 @@
 terraform {
   required_version = ">=1.3"
+
+  backend "azurerm" {
+    storage_account_name = "{{ .Context.StorageAccount }}"
+    resource_group_name = "{{ .Project }}"
+    container_name = "{{ .Bucket }}"
+    key = "{{ .Cluster }}/terraform.tfstate"
+  }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -8,6 +16,10 @@ terraform {
     curl = {
       source  = "anschoewe/curl"
       version = "1.0.2"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.10"
     }
     random = {
       source  = "hashicorp/random"

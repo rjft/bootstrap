@@ -2,13 +2,35 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
 spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
+  name: letsencrypt-prod
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+spec:
+  acme:
+    email: {{ .Values.ownerEmail }}
+    server: {{ .Values.letsencryptServer }}
+    privateKeySecretRef:
+      name: letsencryt-prod-key
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
+{{ if and .Values.acmeEAB.kid .Values.dnsSolver }}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
   name: plural
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
 spec:
   acme:
     # You must replace this email address with your own.
@@ -31,3 +53,4 @@ spec:
     solvers:
     - dns01:
       {{ .Values.dnsSolver | toYaml | nindent 8 }}
+{{ end }}

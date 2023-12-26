@@ -23,7 +23,7 @@ module "pg" {
   maintenance_window_hour         = 12
   maintenance_window_update_track = "stable"
 
-  deletion_protection = true
+  deletion_protection = var.deletion_protection
 
   database_flags = [{ name = "autovacuum", value = "on" }]
 
@@ -32,9 +32,10 @@ module "pg" {
   }
 
   ip_configuration = {
-    ipv4_enabled = true
-    private_network = module.gcp-subnetwork.network_id
-    require_ssl = true
+    ipv4_enabled                  = false
+    psc_enabled                   = true
+    psc_allowed_consumer_projects = [var.project_id]
+    require_ssl                   = true
   }
 
   backup_configuration = {
@@ -53,4 +54,9 @@ module "pg" {
 
   user_name     = "console"
   user_password = random_password.password.result
+
+  depends_on = [ 
+    google_project_service.sql,
+    google_project_service.servicenetworking
+  ]
 }

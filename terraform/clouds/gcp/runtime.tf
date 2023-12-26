@@ -8,8 +8,13 @@ provider "helm" {
   }
 }
 
-module "runtime" {
-  count = var.install_runtime ? 1 : 0
-  source = "../../setup"
-  cluster_endpoint = module.aks.cluster_fqdn
+resource "helm_release" "runtime" {
+  name       = "runtime"
+  namespace  = "plural-runtime"
+  chart      = "${path.module}/../../../charts/runtime"
+  create_namespace = true
+  timeout    = 300
+  values     = [
+    file(var.runtime_values_file)
+  ]
 }

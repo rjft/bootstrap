@@ -21,6 +21,7 @@ external-dns:
 
 ownerEmail: someone@example.com
 acmeServer: https://acme.zerossl.com/v2/DV90
+letsencryptServer: https://acme-v02.api.letsencrypt.org/directory
 
 dnsSolver:
   webhook:
@@ -116,7 +117,7 @@ ingress-nginx:
           prometheus.io/path: "/metrics"
           prometheus.io/scheme: http
       serviceMonitor:
-        enabled: true
+        enabled: false
       prometheusRule:
         enabled: false
 
@@ -188,7 +189,7 @@ ingress-nginx-private:
           prometheus.io/path: "/metrics"
           prometheus.io/scheme: http
       serviceMonitor:
-        enabled: true
+        enabled: false
       prometheusRule:
         enabled: false
 

@@ -1,16 +1,10 @@
 terraform {
-  backend "gcs" {
-    bucket = "{{ .Bucket }}"
-    prefix = "{{ .Cluster }}/bootstrap"
-  }
-
   required_providers {
     google = {
       source = "hashicorp/google"
     }
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = ">= 2.10"
     }
     random = {
       source  = "hashicorp/random"
