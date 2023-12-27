@@ -26,4 +26,4 @@ dependencies:
   condition: ingress-nginx-private.enabled
 - name: flux2
   repository: https://fluxcd-community.github.io/helm-charts
-  version: 2.11.1
+  version: 2.12.2
