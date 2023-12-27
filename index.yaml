@@ -3,6 +3,40 @@ entries:
   runtime:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-12-27T01:48:08.651995241Z"
+    dependencies:
+    - condition: external-dns.enabled
+      name: external-dns
+      repository: https://charts.bitnami.com/bitnami
+      version: 6.28.6
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.13.3
+    - name: plural-certmanager-webhook
+      repository: ""
+      version: 0.1.7
+    - condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.9.0
+    - alias: ingress-nginx-private
+      condition: ingress-nginx-private.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.9.0
+    - name: flux2
+      repository: https://fluxcd-community.github.io/helm-charts
+      version: 2.12.2
+    description: Sets up the basic dependencies needed to get a network stack running
+    digest: f51ed341384abca468c333a8f7ea21097a397fef2833f5668c87cabdb0db280a
+    name: runtime
+    type: application
+    urls:
+    - https://github.com/pluralsh/bootstrap/releases/download/runtime-chart-v0.1.4/runtime-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-12-26T22:36:13.473957307Z"
     dependencies:
     - condition: external-dns.enabled
@@ -103,4 +137,4 @@ entries:
     urls:
     - https://github.com/pluralsh/bootstrap/releases/download/runtime-chart-v0.1.1/runtime-0.1.1.tgz
     version: 0.1.1
-generated: "2023-12-26T22:36:13.473970552Z"
+generated: "2023-12-27T01:48:08.65201657Z"
