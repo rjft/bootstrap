@@ -6,6 +6,7 @@ module "gke" {
   project_id             = var.project_id
   name                   = var.cluster_name
   regional               = true
+  grant_registry_access  = true
   region                 = var.region
   network                = module.gcp-network.network_name
   subnetwork             = module.gcp-network.subnets_names[0]

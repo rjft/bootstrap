@@ -2,22 +2,23 @@ resource "random_password" "password" {
   length      = 20
   min_lower   = 1
   min_numeric = 1
-  min_special = 1
   min_upper   = 1
+  special     = false
 }
 
 module "pg" {
+  count = var.create_db ? 1 : 0
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "18.1.0"
 
   name                 = var.db_name
-  random_instance_name = true
+  random_instance_name = false
   project_id           = var.project_id
   database_version     = "POSTGRES_14"
   region               = var.region
 
   // Master configurations
-  tier                            = "db-custom-16-61440"
+  tier                            = var.db_size
   availability_type               = "REGIONAL"
   maintenance_window_day          = 7
   maintenance_window_hour         = 12
@@ -32,10 +33,12 @@ module "pg" {
   }
 
   ip_configuration = {
-    ipv4_enabled                  = false
-    psc_enabled                   = true
-    psc_allowed_consumer_projects = [var.project_id]
-    require_ssl                   = true
+    ipv4_enabled                  = true
+    private_network               = module.gcp-network.network_id
+    psc_enabled                   = false
+    require_ssl                   = false
+    allocated_ip_range            = var.allocated_range
+    ssl_mode                      = "ENCRYPTED_ONLY"
   }
 
   backup_configuration = {
@@ -57,6 +60,7 @@ module "pg" {
 
   depends_on = [ 
     google_project_service.sql,
-    google_project_service.servicenetworking
+    google_project_service.servicenetworking,
+    google_service_networking_connection.postgres
   ]
 }

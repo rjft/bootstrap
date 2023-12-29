@@ -3,6 +3,11 @@ variable "cluster_name" {
     default = "plural"
 }
 
+variable "create_db" {
+  type = bool
+  default = true
+}
+
 variable "kubernetes_version" {
   type = string
   default = "1.27.3"
@@ -41,6 +46,10 @@ variable "subnet_cidrs" {
 variable "postgres_name" {
   type = string
   default = "plural"
+}
+
+variable "db_sku" {
+  default = "GP_Gen5_2"
 }
 
 variable "install_runtime" {

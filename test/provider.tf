@@ -17,3 +17,19 @@ terraform {
   }
   required_version = ">= 0.13"
 }
+
+data "google_client_config" "current" {}
+
+# provider "kubernetes" {
+#   host                   = "https://${module.gcp.cluster.endpoint}"
+#   token                  = data.google_client_config.default.access_token
+#   cluster_ca_certificate = base64decode(module.gcp.cluster.ca_certificate)
+# }
+
+provider "helm" {
+  kubernetes {
+    host                   = module.gcp.cluster.endpoint
+    cluster_ca_certificate = base64decode(module.gcp.cluster.ca_certificate)
+    token                  = data.google_client_config.current.access_token
+  }
+}

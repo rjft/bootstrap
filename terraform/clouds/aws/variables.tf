@@ -3,6 +3,11 @@ variable "cluster_name" {
     default = "plural"
 }
 
+variable "create_db" {
+  type = bool
+  default = true
+}
+
 variable "kubernetes_version" {
     type = string
     default = "1.27"
@@ -46,4 +51,8 @@ variable "deletion_protection" {
 variable "runtime_values_file" {
   type = string
   default = "../../helm-values/runtime.yaml"
+}
+
+variable "db_instance_class" {
+    default = "db.t4g.large"
 }

@@ -2,18 +2,19 @@ resource "random_password" "password" {
   length      = 20
   min_lower   = 1
   min_numeric = 1
-  min_special = 1
   min_upper   = 1
+  special     = false
 }
 
 module "postgresql" {
+  count = var.create_db ? 1 : 0
   source = "Azure/postgresql/azurerm"
 
   resource_group_name = local.resource_group.name
   location            = local.resource_group.location
 
   server_name                   = var.postgres_name
-  sku_name                      = "GP_Gen5_2"
+  sku_name                      = var.db_sku
   storage_mb                    = 5120
   auto_grow_enabled             = true
   backup_retention_days         = 7

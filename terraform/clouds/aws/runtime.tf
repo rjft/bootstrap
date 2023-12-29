@@ -1,11 +1,3 @@
-provider "helm" {
-  kubernetes {
-    host                   = module.eks.cluster_endpoint
-    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
-  }
-}
-
 module "eks_blueprints_addons" {
   source = "aws-ia/eks-blueprints-addons/aws"
   version = "~> 1.12" #ensure to update this to the latest/desired version
@@ -41,7 +33,7 @@ resource "helm_release" "runtime" {
   namespace        = "plural-runtime"
   chart            = "runtime"
   repository       = "https://pluralsh.github.io/bootstrap"
-  version          = "0.1.3"
+  version          = "0.1.5"
   create_namespace = true
   timeout          = 300
   values           = [

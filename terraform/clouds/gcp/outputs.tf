@@ -14,3 +14,7 @@ output "db_url" {
     value = local.db_url
     sensitive = true
 }
+
+output "runtime_ready" {
+    value = helm_release.runtime
+}

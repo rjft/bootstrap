@@ -19,6 +19,15 @@ external-dns:
         name: plural-env
         key: PLURAL_ACCESS_TOKEN
 
+application:
+  registry: dkr.plural.sh/bootstrap
+  tag: v0.8.3
+
+plural:
+  image:
+    repository: dkr.plural.sh/bootstrap/plural-operator
+    tag: 0.5.5
+
 ownerEmail: someone@example.com
 acmeServer: https://acme.zerossl.com/v2/DV90
 letsencryptServer: https://acme-v02.api.letsencrypt.org/directory

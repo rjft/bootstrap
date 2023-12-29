@@ -2,11 +2,12 @@ resource "random_password" "password" {
   length      = 20
   min_lower   = 1
   min_numeric = 1
-  min_special = 1
   min_upper   = 1
+  special     = false
 }
 
 module "db" {
+  count = var.create_db ? 1 : 0
   source = "terraform-aws-modules/rds/aws"
 
   identifier = "plural"
@@ -15,7 +16,7 @@ module "db" {
   engine_version       = "14"
   family               = "postgres14" # DB parameter group
   major_engine_version = "14"         # DB option group
-  instance_class       = "db.t4g.large"
+  instance_class       = var.db_instance_class
   allocated_storage    = 20
 
   db_name  = "console"
