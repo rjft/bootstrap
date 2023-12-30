@@ -34,6 +34,6 @@ provider "helm" {
   kubernetes {
     host                   = module.mgmt.cluster.endpoint
     cluster_ca_certificate = base64decode(module.mgmt.cluster.ca_certificate)
-    token                  = data.google_client_config.current.access_token
+    token                  = data.google_client_config.default.access_token
   }
 }
