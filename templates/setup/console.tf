@@ -34,7 +34,7 @@ resource "helm_release" "console" {
   create_namespace = true
   timeout          = 300
   values           = [
-    data.local_sensitive_file.console
+    data.local_sensitive_file.console.content
   ]
 
   depends_on = [ module.mgmt.cluster, helm_release.runtime, module.mgmt.db_url ]
