@@ -4,6 +4,7 @@ module "gcp" {
     cluster_name = "bootstrap-test"
     network = "plrl-network"
     subnetwork = "plrl-subnetwork"
+    db_name = "plural"
     allocated_range_name = "google-managed-services"
     deletion_protection = false
 }

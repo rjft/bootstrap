@@ -3,6 +3,11 @@ variable "cluster_name" {
     default = "plural"
 }
 
+variable "db_name" {
+  type = string
+  default = ""
+}
+
 variable "create_db" {
   type = bool
   default = true
@@ -41,11 +46,6 @@ variable "network_cidrs" {
 variable "subnet_cidrs" {
   type = list(string)
   default = ["10.52.0.0/20"]
-}
-
-variable "postgres_name" {
-  type = string
-  default = "plural"
 }
 
 variable "db_sku" {

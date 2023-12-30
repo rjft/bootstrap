@@ -11,7 +11,7 @@ module "pg" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "18.1.0"
 
-  name                 = var.db_name
+  name                 = local.db_name
   random_instance_name = false
   project_id           = var.project_id
   database_version     = "POSTGRES_14"

@@ -13,7 +13,7 @@ module "postgresql" {
   resource_group_name = local.resource_group.name
   location            = local.resource_group.location
 
-  server_name                   = var.postgres_name
+  server_name                   = local.db_name
   sku_name                      = var.db_sku
   storage_mb                    = 5120
   auto_grow_enabled             = true

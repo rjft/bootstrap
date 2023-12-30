@@ -3,6 +3,11 @@ variable "cluster_name" {
     default = "plural"
 }
 
+variable "db_name" {
+  type = string
+  default = ""
+}
+
 variable "create_db" {
   type = bool
   default = true

@@ -99,5 +99,5 @@ variable "ip_range_services_name" {
 
 variable "db_name" {
   type = string
-  default = "plural"
+  default = ""
 }

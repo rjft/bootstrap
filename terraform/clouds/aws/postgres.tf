@@ -10,7 +10,7 @@ module "db" {
   count = var.create_db ? 1 : 0
   source = "terraform-aws-modules/rds/aws"
 
-  identifier = "plural"
+  identifier = local.db_name
 
   engine               = "postgres"
   engine_version       = "14"
