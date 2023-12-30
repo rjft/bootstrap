@@ -25,5 +25,6 @@ module "gke" {
     google_project_service.iam,
     google_project_service.storage,
     google_project_service.dns,
+    # local.db_created,
   ]
 }

@@ -27,16 +27,3 @@ module "eks_blueprints_addons" {
   enable_cluster_proportional_autoscaler = true
   enable_metrics_server                  = true
 }
-
-resource "helm_release" "runtime" {
-  name             = "runtime"
-  namespace        = "plural-runtime"
-  chart            = "runtime"
-  repository       = "https://pluralsh.github.io/bootstrap"
-  version          = var.runtime_vsn
-  create_namespace = true
-  timeout          = 600
-  values           = [
-    file(var.runtime_values_file)
-  ]
-}

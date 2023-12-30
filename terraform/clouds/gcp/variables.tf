@@ -20,7 +20,7 @@ variable "kubernetes_version" {
 
 variable "node_pools" {
   type = list(any)
-  default = [ ]
+  default = [ {name = "default-node-pool"} ]
 }
 
 variable "node_pools_taints" {
@@ -90,18 +90,4 @@ variable "ip_range_services_name" {
 variable "db_name" {
   type = string
   default = "plural"
-}
-
-variable "install_runtime" {
-  type = bool
-  default = true
-}
-
-variable "runtime_values_file" {
-  type = string
-  default = "../../helm-values/runtime.yaml"
-}
-
-variable "runtime_vsn" {
-  default = "0.1.8"
 }

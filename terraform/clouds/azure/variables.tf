@@ -52,20 +52,6 @@ variable "db_sku" {
   default = "GP_Gen5_2"
 }
 
-variable "install_runtime" {
-  type = bool
-  default = true
-}
-
-variable "runtime_values_file" {
-  type = string
-  default = "../../helm-values/runtime.yaml"
-}
-
-variable "runtime_vsn" {
-  default = "0.1.8"
-}
-
 variable "node_pools" {
   type = list(any)
   default = [

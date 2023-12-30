@@ -1,3 +1,17 @@
+resource "helm_release" "runtime" {
+  name             = "runtime"
+  namespace        = "plural-runtime"
+  chart            = "runtime"
+  repository       = "https://pluralsh.github.io/bootstrap"
+  version          = "0.1.8"
+  create_namespace = true
+  timeout          = 600
+  values           = [
+    "${path.module}/../helm-values/runtime.yaml"
+  ]
+
+  depends_on = [ module.mgmt.cluster ]
+}
 
 resource "null_resource" "console" {
   provisioner "local-exec" {
@@ -23,5 +37,5 @@ resource "helm_release" "console" {
     data.local_sensitive_file.console
   ]
 
-  depends_on = [ module.mgmt.cluster, module.mgmt.runtime_ready, module.mgmt.db_url ]
+  depends_on = [ module.mgmt.cluster, helm_release.runtime, module.mgmt.db_url ]
 }

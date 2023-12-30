@@ -4,8 +4,22 @@ module "gcp" {
     cluster_name = "bootstrap-test"
     network = "plrl-network"
     subnetwork = "plrl-subnetwork"
-    runtime_values_file = "../helm-values/runtime.yaml"
     deletion_protection = false
+}
+
+resource "helm_release" "runtime" {
+  name             = "runtime"
+  namespace        = "plural-runtime"
+  chart            = "runtime"
+  repository       = "https://pluralsh.github.io/bootstrap"
+  version          = "0.1.8"
+  create_namespace = true
+  timeout          = 600
+  values           = [
+    file("${path.module}/../helm-values/runtime.yaml")
+  ]
+
+  depends_on = [ module.gcp.cluster ]
 }
 
 resource "null_resource" "console" {
@@ -33,5 +47,5 @@ resource "helm_release" "console" {
     data.local_sensitive_file.console.content
   ]
 
-  depends_on = [ module.gcp.cluster, module.gcp.runtime_ready, module.gcp.db_url ]
+  depends_on = [ module.gcp.cluster, helm_release.runtime, module.gcp.db_url ]
 }

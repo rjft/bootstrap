@@ -38,23 +38,9 @@ variable "public_subnets" {
     default = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
-variable "install_runtime" {
-  type = bool
-  default = true
-}
-
 variable "deletion_protection" {
   type = bool
   default = true
-}
-
-variable "runtime_values_file" {
-  type = string
-  default = "../../helm-values/runtime.yaml"
-}
-
-variable "runtime_vsn" {
-  default = "0.1.8"
 }
 
 variable "db_instance_class" {
@@ -78,6 +64,4 @@ variable "managed_node_groups" {
       desired_size = 3
     }
   }
-}
-  
 }
