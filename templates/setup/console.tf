@@ -23,5 +23,5 @@ resource "helm_release" "console" {
     data.local_sensitive_file.console
   ]
 
-  depends_on = [ null_resource.console, module.mgmt.cluster ]
+  depends_on = [ module.mgmt.cluster ]
 }

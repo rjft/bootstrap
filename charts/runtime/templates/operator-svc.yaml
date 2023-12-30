@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: plural-operator
   labels:
-{{ include "bootstrap.labels" . | indent 4 }}
+{{ include "runtime.labels" . | indent 4 }}
 spec:
   type: NodePort
   ports:

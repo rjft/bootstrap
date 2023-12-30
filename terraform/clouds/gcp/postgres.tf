@@ -37,7 +37,7 @@ module "pg" {
     private_network               = module.gcp-network.network_id
     psc_enabled                   = false
     require_ssl                   = false
-    allocated_ip_range            = var.allocated_range
+    allocated_ip_range            = google_compute_global_address.private_ip_alloc[0].name
     ssl_mode                      = "ENCRYPTED_ONLY"
   }
 

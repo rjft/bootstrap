@@ -2,6 +2,8 @@ module "gcp" {
     source = "../terraform/clouds/gcp"
     project_id = "pluralsh-test-384515"
     cluster_name = "bootstrap-test"
+    network = "plrl-network"
+    subnetwork = "plrl-subnetwork"
     runtime_values_file = "../helm-values/runtime.yaml"
     deletion_protection = false
 }
@@ -31,5 +33,5 @@ resource "helm_release" "console" {
     data.local_sensitive_file.console.content
   ]
 
-  depends_on = [ null_resource.console, module.gcp.cluster ]
+  depends_on = [ module.gcp.cluster ]
 }
