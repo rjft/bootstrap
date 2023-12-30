@@ -10,7 +10,7 @@ variable "create_db" {
 
 variable "deletion_protection" {
   type = bool
-  default = true
+  default = false
 }
 
 variable "kubernetes_version" {
