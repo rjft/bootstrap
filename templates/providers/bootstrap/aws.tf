@@ -44,15 +44,15 @@ data "aws_eks_cluster_auth" "cluster" {
 }
 
 provider "kubernetes" {
-  host                   = module.aws.cluster.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.aws.cluster.cluster_certificate_authority_data)
-  token                  = data.aws_eks_cluster_auth.cluster.token
+  host                   = module.mgmt.cluster.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.mgmt.cluster.cluster_certificate_authority_data)
+  token                  = data.mgmt_eks_cluster_auth.cluster.token
 }
 
 provider "helm" {
   kubernetes {
-    host                   = module.aws.cluster.cluster_endpoint
-    cluster_ca_certificate = base64decode(module.aws.cluster.cluster_certificate_authority_data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
+    host                   = module.mgmt.cluster.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.mgmt.cluster.cluster_certificate_authority_data)
+    token                  = data.mgmt_eks_cluster_auth.cluster.token
   }
 }
