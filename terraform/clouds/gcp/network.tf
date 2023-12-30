@@ -29,7 +29,7 @@ module "gcp-network" {
 
 resource "google_compute_global_address" "private_ip_alloc" {
   count         = var.create_db ? 1 : 0
-  name          = var.allocated_range
+  name          = local.range_name
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
