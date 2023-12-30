@@ -65,3 +65,13 @@ variable "runtime_values_file" {
 variable "runtime_vsn" {
   default = "0.1.8"
 }
+
+variable "node_pools" {
+  type = list(any)
+  default = [
+    {
+        vm_size = "Standard_D2s_v3"
+        node_count = 1
+    }
+  ]
+}

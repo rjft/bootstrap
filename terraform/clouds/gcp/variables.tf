@@ -18,6 +18,26 @@ variable "kubernetes_version" {
   default = "1.27.3-gke.100"
 }
 
+variable "node_pools" {
+  type = list(any)
+  default = [ ]
+}
+
+variable "node_pools_taints" {
+  type = map(list(object({ key = string, value = string, effect = string })))
+  default = { "all": [], "default-node-pool": [] }
+}
+
+variable "node_pools_labels" {
+  type = map(map(string))
+  default = { "all": {}, "default-node-pool": {} }
+}
+
+variable "node_pools_tags" {
+  type = map(list(string))
+  default = { "all": [], "default-node-pool": [] }
+}
+
 variable "project_id" {
   type = string
 }

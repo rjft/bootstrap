@@ -60,3 +60,24 @@ variable "runtime_vsn" {
 variable "db_instance_class" {
     default = "db.t4g.large"
 }
+
+variable "node_group_defaults" {
+  type = any
+  default = {
+    instance_types = ["t3.xlarge", "t3a.xlarge"]
+  }
+}
+
+variable "managed_node_groups" {
+  type = any
+  default = {
+    blue = {}
+    green = {
+      min_size     = 3
+      max_size     = 10
+      desired_size = 3
+    }
+  }
+}
+  
+}

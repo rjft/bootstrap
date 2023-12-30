@@ -12,16 +12,7 @@ module "eks" {
   control_plane_subnet_ids = module.vpc.public_subnet_ids
 
   # EKS Managed Node Group(s)
-  eks_managed_node_group_defaults = {
-    instance_types = ["t3.xlarge", "t3a.xlarge"]
-  }
+  eks_managed_node_group_defaults = var.node_group_defaults
 
-  eks_managed_node_groups = {
-    blue = {}
-    green = {
-      min_size     = 3
-      max_size     = 10
-      desired_size = 3
-    }
-  }
+  eks_managed_node_groups = var.managed_node_groups
 }

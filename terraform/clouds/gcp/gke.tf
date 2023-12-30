@@ -14,6 +14,10 @@ module "gke" {
   ip_range_services      = var.ip_range_services_name
   create_service_account = true
   deletion_protection    = var.deletion_protection
+  node_pools             = var.node_pools
+  node_pools_taints      = var.node_pools_taints
+  node_pools_labels      = var.node_pools_labels
+  node_pools_tags        = var.node_pools_tags
 
   depends_on = [
     google_project_service.gcr,
