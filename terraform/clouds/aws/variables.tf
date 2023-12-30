@@ -54,7 +54,7 @@ variable "runtime_values_file" {
 }
 
 variable "runtime_vsn" {
-  default = "0.1.7"
+  default = "0.1.8"
 }
 
 variable "db_instance_class" {
