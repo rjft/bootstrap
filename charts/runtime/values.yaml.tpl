@@ -2,6 +2,8 @@ external-dns:
   extraArgs:
     plural-cluster: {{ .Cluster }}
     plural-provider: {{ .Provider }}
+  domainFilters:
+  - {{ .Subdomain }}
 
 dnsSolver:  
   config:
