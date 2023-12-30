@@ -35,7 +35,7 @@ resource "helm_release" "runtime" {
   repository       = "https://pluralsh.github.io/bootstrap"
   version          = var.runtime_vsn
   create_namespace = true
-  timeout          = 300
+  timeout          = 600
   values           = [
     file(var.runtime_values_file)
   ]
