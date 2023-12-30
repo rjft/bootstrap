@@ -7,7 +7,7 @@ resource "helm_release" "runtime" {
   create_namespace = true
   timeout          = 600
   values           = [
-    "${path.module}/../helm-values/runtime.yaml"
+    file("${path.module}/../helm-values/runtime.yaml")
   ]
 
   depends_on = [ module.mgmt.cluster ]
