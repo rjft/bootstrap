@@ -82,7 +82,6 @@ variable "runtime_values_file" {
   default = "../../helm-values/runtime.yaml"
 }
 
-variable "console_values_file" {
-  type = string
-  default = "../../helm-values/console.yaml"
+variable "runtime_vsn" {
+  default = "0.1.7"
 }

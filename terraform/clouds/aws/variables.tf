@@ -53,6 +53,10 @@ variable "runtime_values_file" {
   default = "../../helm-values/runtime.yaml"
 }
 
+variable "runtime_vsn" {
+  default = "0.1.7"
+}
+
 variable "db_instance_class" {
     default = "db.t4g.large"
 }

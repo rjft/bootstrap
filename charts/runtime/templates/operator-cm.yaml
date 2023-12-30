@@ -2,6 +2,8 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: plural-operator-selfsigned-issuer
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
 spec:
   selfSigned: {}
 ---
@@ -9,6 +11,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: plural-operator-serving-cert
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
 spec:
   dnsNames:
   - plural-operator-webhook-service.{{ .Release.Namespace }}.svc

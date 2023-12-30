@@ -33,5 +33,5 @@ resource "helm_release" "console" {
     data.local_sensitive_file.console.content
   ]
 
-  depends_on = [ module.gcp.cluster ]
+  depends_on = [ module.gcp.cluster, module.gcp.runtime_ready ]
 }
