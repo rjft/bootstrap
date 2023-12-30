@@ -8,7 +8,7 @@ dnsSolver:
     cluster: {{ .Cluster }}
     provider: {{ .Provider }}
 
-ownerEmail: {{ .Email }}
+ownerEmail: {{ .Config.Email }}
 
 pluralToken: {{ .Config.Token }}
 
