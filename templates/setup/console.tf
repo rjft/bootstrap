@@ -15,7 +15,7 @@ resource "helm_release" "runtime" {
 
 resource "null_resource" "console" {
   provisioner "local-exec" {
-    command = "plural cd control-plane-values --name {{ .Cluster }} --dsn \"${module.mgmt.db_url}\" --domain {{ .Domain }} --file console.yaml"
+    command = "plural cd control-plane-values --name {{ .Cluster }} --dsn \"${module.mgmt.db_url}\" --domain {{ .Subdomain }} --file console.yaml"
     working_dir = "${path.module}/../helm-values"
   }
 }
