@@ -5,10 +5,13 @@ external-dns:
   domainFilters:
   - {{ .Subdomain }}
 
-dnsSolver:  
-  config:
-    cluster: {{ .Cluster }}
-    provider: {{ .Provider }}
+dnsSolver: 
+  webhook:
+    groupName: acme.plural.sh
+    solverName: plural-solver
+    config:
+      cluster: {{ .Cluster }}
+      provider: {{ .Provider }}
 
 ownerEmail: {{ .Config.Email }}
 
