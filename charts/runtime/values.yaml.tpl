@@ -14,7 +14,6 @@ dnsSolver:
       provider: {{ .Provider }}
 
 ownerEmail: {{ .Config.Email }}
-
 pluralToken: {{ .Config.Token }}
 
 acmeEAB:
