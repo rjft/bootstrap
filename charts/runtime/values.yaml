@@ -19,6 +19,11 @@ external-dns:
         name: plural-env
         key: PLURAL_ACCESS_TOKEN
 
+plural-certmanager-webhook:
+  certManager:
+    namespace: plural-runtime
+    serviceAccountName: cert-manager
+
 application:
   registry: dkr.plural.sh/bootstrap
   tag: v0.8.3
@@ -42,6 +47,8 @@ acmeEAB: {}
 cert-manager:
   enabled: true
   installCRDs: true
+  serviceAccount:
+    name: cert-manager
   securityContext:
     fsGroup: 1000
     runAsNonRoot: true
