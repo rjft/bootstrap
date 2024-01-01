@@ -26,12 +26,12 @@ resource "plural_git_repository" "infra" {
 resource "plural_service_deployment" "helm-repositories" {
     name = "helm-repositories"
     namespace = kubernetes_namespace.infra.metadata.name
-    repository {
+    repository = {
         id = plural_git_repository.infra.id
         ref = "main"
         folder = "apps/repositories"
     }
-    cluster {
+    cluster = {
         id = data.plural_cluster.mgmt.id
     }
     protect = true
@@ -40,12 +40,12 @@ resource "plural_service_deployment" "helm-repositories" {
 resource "plural_service_deployment" "apps" {
     name = "apps"
     namespace = kubernetes_namespace.infra.metadata.name
-    repository {
+    repository = {
         id = plural_git_repository.infra.id
         ref = "main"
         folder = "apps/services"
     }
-    cluster {
+    cluster = {
         id = data.plural_cluster.mgmt.id
     }
     protect = true

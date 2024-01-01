@@ -18,23 +18,3 @@ metadata:
 spec:
   interval: 5m0s
   url: https://flagger.app
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: console
-  annotations:
-    "helm.sh/hook": post-install,post-upgrade
-spec:
-  interval: 5m0s
-  url: https://pluralsh.github.io/console
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: bootstrap
-  annotations:
-    "helm.sh/hook": post-install,post-upgrade
-spec:
-  interval: 5m0s
-  url: https://pluralsh.github.io/bootstrap
