@@ -17,6 +17,10 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = ">= 2.10"
     }
+    plural = {
+      source = "pluralsh/plural"
+      version = ">= 0.1.0"
+    }
   }
 }
 
@@ -40,4 +44,16 @@ provider "kubernetes" {
   client_certificate     = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_config[0].client_certificate)
   client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_config[0].client_key)
   cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_config[0].cluster_ca_certificate)
+}
+
+data "kubernetes_secret" "console-auth" {
+  metadata {
+    name = "console-auth-token"
+    namespace = "plrl-console"
+  }
+}
+
+provider "plural" {
+  console_url = "{{ .Console }}"
+  access_token = data.kubernetes_secret.console-auth.data.access-token
 }

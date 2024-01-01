@@ -16,6 +16,10 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = ">= 2.10"
     }
+    plural = {
+      source = "pluralsh/plural"
+      version = ">= 0.1.0"
+    }
   }
 }
 
@@ -35,4 +39,16 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.cluster.token
+}
+
+data "kubernetes_secret" "console-auth" {
+  metadata {
+    name = "console-auth-token"
+    namespace = "plrl-console"
+  }
+}
+
+provider "plural" {
+  console_url = "{{ .Console }}"
+  access_token = data.kubernetes_secret.console-auth.data.access-token
 }
