@@ -41,6 +41,6 @@ data "kubernetes_secret" "console-auth" {
 }
 
 provider "plural" {
-  console_url = "{{ .Console }}"
+  console_url = "https://console.{{ .Subdomain }}"
   access_token = data.kubernetes_secret.console-auth.data.access-token
 }
