@@ -48,5 +48,8 @@ resource "plural_service_deployment" "apps" {
     cluster = {
         id = data.plural_cluster.mgmt.id
     }
+    configuration = [
+        { name = "gitUrl", value = context.configuration.console.repo_url },
+    ]
     protect = true
 }

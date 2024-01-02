@@ -1,7 +1,7 @@
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
-  name: console
+  name: runtime
   namespace: infra
 spec:
   version: 0.0.1
@@ -14,9 +14,9 @@ spec:
     namespace: infra
   helm:
     version: "0.x.x"
-    chart: console
+    chart: runtime
     valuesFiles:
-    - console.yaml
+    - runtime.yaml
     repository:
       namespace: infra
       name: runtime
