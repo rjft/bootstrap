@@ -18,8 +18,8 @@ resource "kubernetes_namespace" "infra" {
 }
 
 resource "plural_git_repository" "infra" {
-    url         = local.context.configuration.console.repo_url
-    private_key = local.context.configuration.console.private_key
+    url         = local.context.spec.configuration.console.repo_url
+    private_key = local.context.spec.configuration.console.private_key
     decrypt     = true
 }
 
@@ -50,9 +50,9 @@ resource "plural_service_deployment" "apps" {
     cluster = {
         id = data.plural_cluster.mgmt.id
     }
-    configuration = [
-        { name = "repoUrl", value = local.context.configuration.console.repo_url },
-    ]
+    configuration = {
+        repoUrl  = local.context.spec.configuration.console.repo_url 
+    }
     protect = true
 
     depends_on = [ kubernetes_namespace.infra ]
