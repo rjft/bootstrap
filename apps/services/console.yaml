@@ -19,7 +19,7 @@ spec:
     - console.yaml
     repository:
       namespace: infra
-      name: runtime
+      name: console
   clusterRef:
     kind: Cluster
     name: mgmt
