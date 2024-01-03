@@ -35,6 +35,8 @@ resource "plural_service_deployment" "helm-repositories" {
         id = data.plural_cluster.mgmt.id
     }
     protect = true
+
+    depends_on = [ kubernetes_namespace.infra ]
 }
 
 resource "plural_service_deployment" "apps" {
@@ -52,4 +54,6 @@ resource "plural_service_deployment" "apps" {
         { name = "repoUrl", value = local.context.configuration.console.repo_url },
     ]
     protect = true
+
+    depends_on = [ kubernetes_namespace.infra ]
 }
