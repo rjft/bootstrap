@@ -1,9 +1,9 @@
 locals {
-  context = yamldecode(local_sensitive_file.context)
+  context = yamldecode(data.local_sensitive_file.context.content)
 }
 
 data "local_sensitive_file" "context" {
-  filename = "${path.module}/../context.yaml"
+  filename = "${path.module}/../../context.yaml"
 }
 
 data "plural_cluster" "mgmt" {
@@ -18,9 +18,9 @@ resource "kubernetes_namespace" "infra" {
 }
 
 resource "plural_git_repository" "infra" {
-    url = context.configuration.console.repo_url
-    private_key = context.configuration.console.private_key
-    decrypt = true
+    url         = local.context.configuration.console.repo_url
+    private_key = local.context.configuration.console.private_key
+    decrypt     = true
 }
 
 resource "plural_service_deployment" "helm-repositories" {
@@ -49,7 +49,7 @@ resource "plural_service_deployment" "apps" {
         id = data.plural_cluster.mgmt.id
     }
     configuration = [
-        { name = "gitUrl", value = context.configuration.console.repo_url },
+        { name = "repoUrl", value = local.context.configuration.console.repo_url },
     ]
     protect = true
 }
