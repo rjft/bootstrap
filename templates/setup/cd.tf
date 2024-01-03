@@ -25,7 +25,7 @@ resource "plural_git_repository" "infra" {
 
 resource "plural_service_deployment" "helm-repositories" {
     name = "helm-repositories"
-    namespace = kubernetes_namespace.infra.metadata.name
+    namespace = kubernetes_namespace.infra.metadata[0].name
     repository = {
         id = plural_git_repository.infra.id
         ref = "main"
@@ -39,7 +39,7 @@ resource "plural_service_deployment" "helm-repositories" {
 
 resource "plural_service_deployment" "apps" {
     name = "apps"
-    namespace = kubernetes_namespace.infra.metadata.name
+    namespace = kubernetes_namespace.infra.metadata[0].name
     repository = {
         id = plural_git_repository.infra.id
         ref = "main"
