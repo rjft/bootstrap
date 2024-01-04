@@ -7,7 +7,7 @@ resource "random_password" "password" {
 }
 
 module "db" {
-  count = var.create_db ? 1 : 0
+  count  = var.create_db ? 1 : 0
   source = "terraform-aws-modules/rds/aws"
 
   identifier = local.db_name
@@ -31,10 +31,10 @@ module "db" {
   monitoring_interval    = "30"
   monitoring_role_name   = "PluralRDSMonitoringRole"
   create_monitoring_role = true
-  
+
   # DB subnet group
   create_db_subnet_group = true
-  subnet_ids             = module.vpc.private_subnet_ids
+  subnet_ids             = module.vpc.private_subnets
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   parameters = [
