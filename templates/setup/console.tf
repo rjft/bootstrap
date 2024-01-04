@@ -30,7 +30,7 @@ resource "helm_release" "console" {
   namespace        = "plrl-console"
   chart            = "console"
   repository       = "https://pluralsh.github.io/console"
-  version          = "0.1.19"
+  version          = "0.1.20"
   create_namespace = true
   timeout          = 300
   values           = [
