@@ -5,6 +5,7 @@ metadata:
   namespace: infra
 spec:
   version: 0.0.1
+  namespace: plrl-console
   git:
     folder: helm-values
     ref: main
