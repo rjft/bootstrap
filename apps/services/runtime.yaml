@@ -4,7 +4,6 @@ metadata:
   name: runtime
   namespace: infra
 spec:
-  version: 0.0.1
   namespace: plural-runtime
   git:
     folder: helm-values
