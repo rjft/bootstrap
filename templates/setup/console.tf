@@ -78,7 +78,7 @@ resource "helm_release" "console" {
   version          = "0.1.21"
   create_namespace = true
   timeout          = 300
-  wait             = false
+  wait             = true
   values           = [
     data.local_sensitive_file.console.content
   ]
