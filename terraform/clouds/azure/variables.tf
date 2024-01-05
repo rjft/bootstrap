@@ -53,7 +53,7 @@ variable "db_sku" {
 }
 
 variable "node_pools" {
-  type = list(any)
+  type = map({})
   default = {
     plural = {
       vm_size = "Standard_D2s_v3"
