@@ -7,7 +7,7 @@ output "network" {
 }
 
 output "db" {
-    value = module.postgresql
+    value = azurerm_postgresql_flexible_server.postgres
 }
 
 output "db_url" {
