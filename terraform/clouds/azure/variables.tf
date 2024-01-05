@@ -54,10 +54,12 @@ variable "db_sku" {
 
 variable "node_pools" {
   type = list(any)
-  default = [
-    {
-        vm_size = "Standard_D2s_v3"
-        node_count = 1
+  default = {
+    plural = {
+      vm_size = "Standard_D2s_v3"
+      node_count = 3
+      min_count = 1
+      max_count = 20
     }
-  ]
+  }
 }
