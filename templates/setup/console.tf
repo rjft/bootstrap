@@ -1,3 +1,7 @@
+data "local_sensitive_file" "runtime" {
+  filename = "${path.module}/../helm-values/runtime.yaml"
+}
+
 resource "helm_release" "runtime" {
   name             = "runtime"
   namespace        = "plural-runtime"
@@ -5,9 +9,10 @@ resource "helm_release" "runtime" {
   repository       = "https://pluralsh.github.io/bootstrap"
   version          = "0.1.10"
   create_namespace = true
-  timeout          = 600
+  timeout          = 300
+  wait             = false
   values           = [
-    file("${path.module}/../helm-values/runtime.yaml")
+    data.local_sensitive_file.console.content
   ]
 
   depends_on = [ module.mgmt.cluster ]
@@ -33,6 +38,7 @@ resource "helm_release" "console" {
   version          = "0.1.21"
   create_namespace = true
   timeout          = 300
+  wait             = false
   values           = [
     data.local_sensitive_file.console.content
   ]
