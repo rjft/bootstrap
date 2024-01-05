@@ -2,8 +2,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: bitnami
-  annotations:
-    "helm.sh/hook": post-install,post-upgrade
 spec:
   interval: 5m0s
   type: oci
@@ -13,8 +11,22 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: flagger
-  annotations:
-    "helm.sh/hook": post-install,post-upgrade
 spec:
   interval: 5m0s
   url: https://flagger.app
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: cert-manager
+spec:
+  interval: 5m0s
+  url: https://charts.jetstack.io
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: flux
+spec:
+  interval: 5m0s
+  url: https://fluxcd-community.github.io/helm-charts

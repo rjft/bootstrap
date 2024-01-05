@@ -1,0 +1,6 @@
+installCRDs: true
+serviceAccount:
+  name: cert-manager
+securityContext:
+  fsGroup: 1000
+  runAsNonRoot: true

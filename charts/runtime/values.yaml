@@ -45,7 +45,7 @@ dnsSolver:
 acmeEAB: {}
 
 cert-manager:
-  enabled: true
+  enabled: false
   installCRDs: true
   serviceAccount:
     name: cert-manager
@@ -210,6 +210,7 @@ ingress-nginx-private:
         enabled: false
 
 flux2:
+  enabled: false
   helmController:
     create: false
   imageAutomationController:

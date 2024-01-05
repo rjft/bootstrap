@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: plural-operator
-  annotations:
-    "helm.sh/hook": post-install,post-upgrade
   labels:
     control-plane: plural-operator
     {{- include "runtime.labels" . | nindent 4 }}
