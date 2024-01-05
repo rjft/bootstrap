@@ -9,7 +9,7 @@ resource "random_password" "password" {
 resource "azurerm_private_dns_zone" "postgres" {
   count = var.create_db ? 1 : 0
 
-  name                = "plrl.database.azure.com"
+  name                = "plrl.postgres.database.azure.com"
   resource_group_name = local.resource_group.name
 }
 
