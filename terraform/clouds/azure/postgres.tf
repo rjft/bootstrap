@@ -27,14 +27,11 @@ module "postgresql" {
   db_names                      = ["console"]
   db_charset                    = "UTF8"
   db_collation                  = "English_United States.1252"
-
-  vnet_rule_name_prefix = "plural-postgresql-vnet-rule-"
-  vnet_rules = [
-    { name = "subnet1", subnet_id = azurerm_subnet.network.id }
-  ]
 }
 
 resource "azurerm_private_endpoint" "pg" {
+  count = var.create_db ? 1 : 0
+
   name                = "${local.resource_group.name}-${local.db_name}"
   location            = local.resource_group.location
   resource_group_name = local.resource_group.name
@@ -42,7 +39,7 @@ resource "azurerm_private_endpoint" "pg" {
 
   private_service_connection {
     name                           = "${local.resource_group.name}-${local.db_name}"
-    private_connection_resource_id = module.postgresql.server_id
+    private_connection_resource_id = module.postgresql[0].server_id
     subresource_names              = ["postgresqlServer"]
     is_manual_connection           = false
   }
