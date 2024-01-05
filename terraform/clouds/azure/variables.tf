@@ -50,7 +50,7 @@ variable "subnet_cidrs" {
 
 variable "postgres_cidrs" {
   type = list(string)
-  default = ["10.0.2.0/24"]
+  default = ["10.52.16.0/24"]
 }
 
 variable "postgres_disk" {
