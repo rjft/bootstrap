@@ -34,6 +34,14 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
 
   storage_mb = var.postgres_disk
   sku_name   = var.postgres_sku
+
+  high_availability {
+    mode = "ZoneRedundant"
+  }
+
+  lifecycle {
+    ignore_changes = [ zone ]
+  }
 }
 
 resource "azurerm_postgresql_flexible_server_database" "example" {
