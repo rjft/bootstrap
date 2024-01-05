@@ -10,7 +10,7 @@ module "aks" {
   sku_tier             = "Standard"
   rbac_aad             = false 
   vnet_subnet_id       = azurerm_subnet.network.id
-  node_pools           = {for name, pool in var.node_pools : name => merge({name = name}, pool)}
+  node_pools           = {for name, pool in var.node_pools : name => merge(pool, {name = name, vnet_subnet_id = azurerm_subnet.network.id})}
   
   role_based_access_control_enabled = true
 }
