@@ -33,3 +33,17 @@ module "postgresql" {
     { name = "subnet1", subnet_id = azurerm_subnet.network.id }
   ]
 }
+
+resource "azurerm_private_endpoint" "pg" {
+  name                = "${local.resource_group.name}-${local.db_name}"
+  location            = local.resource_group.location
+  resource_group_name = local.resource_group.name
+  subnet_id           = azurerm_subnet.network.id
+
+  private_service_connection {
+    name                           = "${local.resource_group.name}-${local.db_name}"
+    private_connection_resource_id = module.postgresql.server_id
+    subresource_names              = ["postgresqlServer"]
+    is_manual_connection           = false
+  }
+}
