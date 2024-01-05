@@ -7,18 +7,21 @@ resource "random_password" "password" {
 }
 
 resource "azurerm_private_dns_zone" "postgres" {
-  name                = "postgres.database.azure.com"
+  count = var.create_db ? 1 : 0
+  name                = "plrl.database.azure.com"
   resource_group_name = local.resource_group.name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "postgres" {
-  name                  = "plural.postgres.com"
+  count = var.create_db ? 1 : 0
+  name                  = "plrl.postgres.com"
   private_dns_zone_name = azurerm_private_dns_zone.postgres.name
   virtual_network_id    = azurerm_virtual_network.network.id
   resource_group_name   = local.resource_group.name
 }
 
 resource "azurerm_postgresql_flexible_server" "postgres" {
+  count = var.create_db ? 1 : 0
   name                   = var.db_name
   resource_group_name    = local.resource_group.name
   location               = local.resource_group.location
@@ -31,4 +34,12 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
 
   storage_mb = var.postgres_disk
   sku_name   = var.postgres_sku
+}
+
+resource "azurerm_postgresql_flexible_server_database" "example" {
+  count     = var.create_db ? 1 : 0
+  name      = "console"
+  server_id = azurerm_postgresql_flexible_server.postgres[0].id
+  collation = "en_US.utf8"
+  charset   = "utf8"
 }
