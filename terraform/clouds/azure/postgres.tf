@@ -26,7 +26,7 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   delegated_subnet_id    = azurerm_subnet.network.id
   private_dns_zone_id    = azurerm_private_dns_zone.postgres.id
   administrator_login    = "console"
-  administrator_password = random_password.password
+  administrator_password = random_password.password.result
   zone                   = "1"
 
   storage_mb = var.postgres_disk
