@@ -7,7 +7,7 @@ resource "random_password" "password" {
 }
 
 resource "azurerm_private_dns_zone" "postgres" {
-  name                = "plural.postgres.database.azure.com"
+  name                = "postgres.database.azure.com"
   resource_group_name = local.resource_group.name
 }
 
