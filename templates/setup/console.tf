@@ -25,7 +25,7 @@ data "local_sensitive_file" "flux" {
 resource "helm_release" "flux" {
   name             = "flux"
   namespace        = "flux"
-  chart            = "flux"
+  chart            = "flux2"
   repository       = "https://fluxcd-community.github.io/helm-charts"
   version          = "2.12.2"
   create_namespace = true

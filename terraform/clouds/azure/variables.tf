@@ -5,7 +5,7 @@ variable "cluster_name" {
 
 variable "db_name" {
   type = string
-  default = ""
+  default = "plural"
 }
 
 variable "create_db" {
@@ -46,6 +46,21 @@ variable "network_cidrs" {
 variable "subnet_cidrs" {
   type = list(string)
   default = ["10.52.0.0/20"]
+}
+
+variable "postgres_cidrs" {
+  type = list(string)
+  default = ["10.0.2.0/24"]
+}
+
+variable "postgres_disk" {
+  type = number
+  default = 32768
+}
+
+variable "postgres_sku" {
+  type = string
+  default = "GP_Standard_D4s_v3"
 }
 
 variable "db_sku" {
