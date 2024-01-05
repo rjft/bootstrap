@@ -60,6 +60,7 @@ variable "node_pools" {
       node_count = 3
       min_count = 1
       max_count = 20
+      enable_auto_scaling = true
     }
   }
 }
