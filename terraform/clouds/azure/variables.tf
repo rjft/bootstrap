@@ -20,7 +20,7 @@ variable "kubernetes_version" {
 
 variable "create_resource_group" {
     type = bool
-    default = true
+    default = false
 }
 
 variable "resource_group_name" {
