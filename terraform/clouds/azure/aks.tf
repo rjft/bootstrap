@@ -8,6 +8,7 @@ module "aks" {
   prefix               = var.cluster_name
   os_disk_size_gb      = 60
   sku_tier             = "Standard"
+  rbac_aad             = false 
   vnet_subnet_id       = azurerm_subnet.network.id
   node_pools           = {for name, pool in var.node_pools : name => merge({name = name}, pool)}
   
