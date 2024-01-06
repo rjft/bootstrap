@@ -32,7 +32,6 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   private_dns_zone_id    = azurerm_private_dns_zone.postgres[0].id
   administrator_login    = "console"
   administrator_password = random_password.password.result
-  zone                   = "1"
 
   storage_mb = var.postgres_disk
   sku_name   = var.postgres_sku
@@ -44,6 +43,8 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   lifecycle {
     ignore_changes = [ zone, high_availability.0.standby_availability_zone ]
   }
+
+  depends_on = [ azurerm_subnet.postgres ]
 }
 
 resource "azurerm_postgresql_flexible_server_database" "console" {
