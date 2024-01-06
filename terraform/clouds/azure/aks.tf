@@ -14,5 +14,6 @@ module "aks" {
   
   ebpf_data_plane = "cilium"
   network_plugin_mode = "overlay"
+  network_plugin = "azure"
   role_based_access_control_enabled = true
 }
