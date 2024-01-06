@@ -42,11 +42,11 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   }
 
   lifecycle {
-    ignore_changes = [ zone ]
+    ignore_changes = [ zone, high_availability.0.standby_availability_zone ]
   }
 }
 
-resource "azurerm_postgresql_flexible_server_database" "example" {
+resource "azurerm_postgresql_flexible_server_database" "console" {
   count     = var.create_db ? 1 : 0
   name      = "console"
   server_id = azurerm_postgresql_flexible_server.postgres[0].id

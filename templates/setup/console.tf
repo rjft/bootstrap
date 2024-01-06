@@ -52,7 +52,7 @@ resource "helm_release" "runtime" {
   timeout          = 300
   wait             = false
   values           = [
-    data.local_sensitive_file.console.content
+    data.local_sensitive_file.runtime.content
   ]
 
   depends_on = [ module.mgmt.cluster, helm_release.certmanager, helm_release.flux ]
