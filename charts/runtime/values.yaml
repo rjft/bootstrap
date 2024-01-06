@@ -21,7 +21,7 @@ external-dns:
 
 plural-certmanager-webhook:
   certManager:
-    namespace: plural-runtime
+    namespace: cert-manager
     serviceAccountName: cert-manager
 
 application:
