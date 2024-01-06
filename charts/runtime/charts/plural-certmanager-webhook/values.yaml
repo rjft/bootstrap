@@ -10,7 +10,7 @@ groupName: acme.plural.sh
 
 certManager:
   namespace: cert-manager
-  serviceAccountName: certmanager
+  serviceAccountName: cert-manager
 
 image:
   repository: dkr.plural.sh/bootstrap/plural-certmanager-webhook
