@@ -44,6 +44,8 @@ dnsSolver:
 
 acmeEAB: {}
 
+certManagerNamespace: cert-manager
+
 cert-manager:
   enabled: false
   installCRDs: true
