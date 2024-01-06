@@ -13,5 +13,6 @@ module "aks" {
   node_pools           = {for name, pool in var.node_pools : name => merge(pool, {name = name, vnet_subnet_id = azurerm_subnet.network.id})}
   
   ebpf_data_plane = "cilium"
+  network_plugin_mode = "overlay"
   role_based_access_control_enabled = true
 }
