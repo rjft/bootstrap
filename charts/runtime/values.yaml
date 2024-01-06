@@ -55,7 +55,7 @@ cert-manager:
     fsGroup: 1000
     runAsNonRoot: true
 
-ingress-nginx:
+ingress-nginx-private:
   enabled: true
   controller:
     image:
@@ -70,6 +70,7 @@ ingress-nginx:
       controllerValue: "k8s.io/internal-ingress-nginx"
     service:
       annotations:
+        service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
         networking.gke.io/load-balancer-type: "Internal"
         service.beta.kubernetes.io/azure-load-balancer-internal: "true"
         service.beta.kubernetes.io/aws-load-balancer-scheme: internal
@@ -139,7 +140,7 @@ ingress-nginx:
       prometheusRule:
         enabled: false
 
-ingress-nginx-private:
+ingress-nginx:
   enabled: true
   controller:
     image:
@@ -147,6 +148,9 @@ ingress-nginx-private:
       digestChroot: null
     admissionWebhooks:
       enabled: false
+    service:
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     config:
       worker-shutdown-timeout: 240s
       proxy-body-size: '0'
