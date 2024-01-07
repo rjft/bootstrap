@@ -19,6 +19,8 @@ module "gke" {
   node_pools_labels      = var.node_pools_labels
   node_pools_tags        = var.node_pools_tags
 
+  datapath_provider = "ADVANCED_DATAPATH"
+
   depends_on = [
     google_project_service.gcr,
     google_project_service.container,
