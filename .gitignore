@@ -34,3 +34,4 @@ override.tf.json
 terraform.rc
 
 helm-values
+test/helm-values

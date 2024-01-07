@@ -7,32 +7,33 @@ resource "random_password" "password" {
 }
 
 module "db" {
-  count  = var.create_db ? 1 : 0
+  create_db_instance = var.create_db
   source = "terraform-aws-modules/rds/aws"
+  version = "~> 6.3"
 
   identifier = local.db_name
 
   engine               = "postgres"
-  engine_version       = "14"
-  family               = "postgres14" # DB parameter group
-  major_engine_version = "14"         # DB option group
+  engine_version       = var.postgres_vsn
+  family               = "postgres14"
+  major_engine_version = var.postgres_vsn 
   instance_class       = var.db_instance_class
-  allocated_storage    = 20
+  allocated_storage    = var.db_storage
 
   db_name  = "console"
   username = "console"
   password = random_password.password.result
+  manage_master_user_password = false
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
 
-  # Enhanced Monitoring - see example for details on how to create the role
-  # by yourself, in case you don't want to create it automatically
   monitoring_interval    = "30"
   monitoring_role_name   = "PluralRDSMonitoringRole"
   create_monitoring_role = true
 
-  # DB subnet group
+  multi_az = true
+
   create_db_subnet_group = true
   subnet_ids             = module.vpc.private_subnets
   vpc_security_group_ids = [module.security_group.security_group_id]
@@ -56,11 +57,10 @@ module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name        = "plural-db-security-group"
-  description = "Complete PostgreSQL example security group"
+  name        = "${local.db_name}-db-security-group"
+  description = "security group for your plural console db"
   vpc_id      = module.vpc.vpc_id
 
-  # ingress
   ingress_with_cidr_blocks = [
     {
       from_port   = 5432

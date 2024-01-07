@@ -8,6 +8,16 @@ variable "db_name" {
   default = ""
 }
 
+variable "db_storage" {
+  type = number
+  default = 20
+}
+
+variable "postgres_vsn" {
+  type = string
+  default = "14"
+}
+
 variable "create_db" {
   type    = bool
   default = true
@@ -69,4 +79,9 @@ variable "managed_node_groups" {
       desired_size = 3
     }
   }
+}
+
+variable "create_cloudwatch_log_group" {
+  type = bool
+  default = false
 }

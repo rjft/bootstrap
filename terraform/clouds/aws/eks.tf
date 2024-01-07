@@ -15,4 +15,6 @@ module "eks" {
   eks_managed_node_group_defaults = var.node_group_defaults
 
   eks_managed_node_groups = var.managed_node_groups
+
+  create_cloudwatch_log_group = var.create_cloudwatch_log_group
 }

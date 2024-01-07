@@ -1,12 +1,6 @@
 terraform {
   required_version = ">= 1.0"
 
-  backend "s3" {
-    bucket = "{{ .Bucket }}"
-    key = "{{ .Cluster }}/bootstrap/terraform.tfstate"
-    region = "{{ .Region }}"
-  }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -32,7 +26,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "{{ .Region }}"
+  region = "us-east-1"
 }
 
 data "aws_eks_cluster" "cluster" {
@@ -46,6 +40,12 @@ data "aws_eks_cluster_auth" "cluster" {
 
   depends_on = [ module.mgmt.cluster ]
 }
+
+# provider "kubernetes" {
+#   host                   = module.mgmt.cluster.cluster_endpoint
+#   cluster_ca_certificate = base64decode(module.mgmt.cluster.cluster_certificate_authority_data)
+#   token                  = data.mgmt_eks_cluster_auth.cluster.token
+# }
 
 provider "helm" {
   kubernetes {
