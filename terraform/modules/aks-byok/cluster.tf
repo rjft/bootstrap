@@ -9,7 +9,7 @@ resource "plural_cluster" "this" {
     name     = var.cluster_name
     tags     = var.tags
     protect  = var.protect
-    bindings = var.bindings
+    # bindings = var.bindings
     cloud    = "byok"
     cloud_settings = {
         byok = {
