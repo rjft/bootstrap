@@ -56,37 +56,3 @@ prometheus:
 operator:
   prometheus:
     enabled: true
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: cilium.io/no-schedule
-            operator: NotIn
-            values:
-            - "true"
-
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cilium.io/no-schedule
-          operator: NotIn
-          values:
-          - "true"
-
-authentication:
-  mutual:
-    spire:
-      install:
-        agent:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: cilium.io/no-schedule
-                    operator: NotIn
-                    values:
-                    - "true"
