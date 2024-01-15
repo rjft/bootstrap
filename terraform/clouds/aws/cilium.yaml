@@ -1,0 +1,92 @@
+# encryption:
+#   enabled: true
+#   type: wireguard
+
+eni:
+  enabled: true
+  awsReleaseExcessIPs: true
+  awsEnablePrefixDelegation: true
+ipam:
+  mode: eni
+egressMasqueradeInterfaces: eth0
+routingMode: native
+kubeProxyReplacement: true # Needed for Ingress and Gateway API
+envoy:
+  enabled: true # dedicated envoy instead of running envoy alongside cilium-agent
+nodePort:
+  enabled: true # Needed for ingress
+ingressController:
+  enabled: true
+  default: true
+  loadbalancerMode: shared # One LB for all ingresses
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-type: external
+
+# gatewayAPI:
+#   enabled: true
+socketLB:
+  hostNamespaceOnly: true # Needed for Istio with kubeProxyReplacement
+hubble:
+  enabled: true
+  metrics:
+    enabled:
+    # - dns
+    - dns:query;ignoreAAAA
+    - drop
+    - tcp
+    - flow
+    - port-distribution
+    - icmp
+    - http
+    # - httpV2:exemplars=true;labelsContext=source_ip\,source_namespace\,source_workload\,destination_ip\,destination_namespace\,destination_workload\,traffic_direction
+  ui:
+    enabled: true
+  relay:
+    enabled: true
+prometheus:
+  enabled: true
+  # serviceMonitor:
+  #   enabled: true
+# dashboards:
+#   enabled: true
+operator:
+  prometheus:
+    enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: cilium.io/no-schedule
+            operator: NotIn
+            values:
+            - "true"
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: cilium.io/no-schedule
+          operator: NotIn
+          values:
+          - "true"
+
+authentication:
+  mutual:
+    spire:
+      install:
+        agent:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: cilium.io/no-schedule
+                    operator: NotIn
+                    values:
+                    - "true"

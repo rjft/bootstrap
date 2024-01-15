@@ -16,7 +16,7 @@ module "db" {
   engine               = "postgres"
   engine_version       = var.postgres_vsn
   family               = "postgres14"
-  major_engine_version = var.postgres_vsn 
+  major_engine_version = var.postgres_vsn
   instance_class       = var.db_instance_class
   allocated_storage    = var.db_storage
 
@@ -24,6 +24,7 @@ module "db" {
   username = "console"
   password = random_password.password.result
   manage_master_user_password = false
+  ca_cert_identifier = "rds-ca-rsa2048-g1"
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -36,7 +37,7 @@ module "db" {
 
   create_db_subnet_group = true
   subnet_ids             = module.vpc.private_subnets
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.db_security_group.security_group_id]
 
   parameters = [
     {
@@ -53,11 +54,11 @@ module "db" {
   deletion_protection = var.deletion_protection
 }
 
-module "security_group" {
+module "db_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name        = "${local.db_name}-db-security-group"
+  name        = "${local.db_name}-security-group"
   description = "security group for your plural console db"
   vpc_id      = module.vpc.vpc_id
 

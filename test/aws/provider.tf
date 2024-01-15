@@ -26,31 +26,31 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.mgmt.cluster.cluster_name
+  name = module.mgmt.cluster_name
 
-  depends_on = [ module.mgmt.cluster ]
+  depends_on = [ module.mgmt.cluster_name ]
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.mgmt.cluster.cluster_name
+  name = module.mgmt.cluster_name
 
-  depends_on = [ module.mgmt.cluster ]
+  depends_on = [ module.mgmt.cluster_name ]
 }
 
-# provider "kubernetes" {
-#   host                   = module.mgmt.cluster.cluster_endpoint
-#   cluster_ca_certificate = base64decode(module.mgmt.cluster.cluster_certificate_authority_data)
-#   token                  = data.mgmt_eks_cluster_auth.cluster.token
-# }
+provider "kubernetes" {
+  host                   = module.mgmt.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.mgmt.cluster_certificate_authority_data)
+  token                  = data.aws_eks_cluster_auth.cluster.token
+}
 
 provider "helm" {
   kubernetes {
-    host                   = module.mgmt.cluster.cluster_endpoint
-    cluster_ca_certificate = base64decode(module.mgmt.cluster.cluster_certificate_authority_data)
+    host                   = module.mgmt.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.mgmt.cluster_certificate_authority_data)
     token                  = data.aws_eks_cluster_auth.cluster.token
   }
 }
