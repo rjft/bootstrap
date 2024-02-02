@@ -66,17 +66,29 @@ variable "node_group_defaults" {
   type = any
   default = {
     instance_types = ["t3.xlarge", "t3a.xlarge"]
+    block_device_mappings = [
+      {
+        device_name = "/dev/xvda"
+        ebs = {
+          volume_size = 50
+          volume_type = "gp3"
+          delete_on_termination = true
+          encrypted = true
+        }
+      }
+    ]
+    disk_size = 50
   }
 }
 
 variable "managed_node_groups" {
   type = any
   default = {
-    blue = {}
     green = {
-      min_size     = 3
-      max_size     = 10
-      desired_size = 3
+      use_name_prefix = false
+      min_size        = 3
+      max_size        = 10
+      desired_size    = 3
     }
   }
 }

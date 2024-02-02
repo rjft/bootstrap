@@ -12,14 +12,9 @@ resource "plural_cluster" "this" {
     tags     = var.tags
     protect  = var.protect
     # bindings = var.bindings
-    cloud    = "byok"
-    cloud_settings = {
-      byok = {
-        kubeconfig = { 
-          host                   = data.aws_eks_cluster.cluster.endpoint
-          cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-          token                  = data.aws_eks_cluster_auth.cluster.token
-        }
-      }
+    kubeconfig = { 
+      host                   = data.aws_eks_cluster.cluster.endpoint
+      cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+      token                  = data.aws_eks_cluster_auth.cluster.token
     }
 }
