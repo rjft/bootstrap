@@ -11,7 +11,7 @@ external-dns:
     name: external-dns
     create: true
   txtOwnerId: plural
-  policy: sync
+  policy: upsert-only
   extraEnvVars:
   - name: PLURAL_ACCESS_TOKEN
     valueFrom:
