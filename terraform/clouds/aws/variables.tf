@@ -58,6 +58,11 @@ variable "deletion_protection" {
   default = true
 }
 
+variable "backup_retention_period" {
+  type = number
+  default = 7
+}
+
 variable "db_instance_class" {
   default = "db.t4g.large"
 }
