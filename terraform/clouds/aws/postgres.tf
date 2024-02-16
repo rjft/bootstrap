@@ -27,6 +27,7 @@ module "db" {
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
+  backup_retention_period = var.backup_retention_period
 
   monitoring_interval    = "30"
   monitoring_role_name   = local.monitoring_role_name
