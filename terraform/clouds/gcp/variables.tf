@@ -15,7 +15,7 @@ variable "deletion_protection" {
 
 variable "kubernetes_version" {
   type = string
-  default = "1.27.3-gke.100"
+  default = "1.27.10-gke.1055000"
 }
 
 variable "node_pools" {
@@ -62,12 +62,12 @@ variable "subnetwork" {
 
 variable "subnet_cidr" {
   type = string
-  default = "10.0.0.0/17"
+  default = "10.0.16.0/20"
 }
 
 variable "pods_cidr" {
   type = string
-  default = "192.168.0.0/18"
+  default = "10.16.0.0/12"
 }
 
 variable "allocated_range_name" {
@@ -82,7 +82,7 @@ variable "db_size" {
 
 variable "services_cidr" {
   type = string
-  default = "192.168.64.0/18"
+  default = "10.1.0.0/20"
 }
 
 variable "ip_range_pods_name" {
