@@ -99,3 +99,11 @@ module "prod" {
 This will register the cluster in your instance of the plural console.  You need to put it in the separate terraform stack because that's where the plural terraform provider has actually been fully initialized.  There's of course plenty of flexibility as to how you'd want to organize this especially for larger scale usecases, but this should serve most organizations well.  
 
 One other common pattern we anticipate is for separate suborganizations each sharing a company wide Plural console to register it w/in their own git repos defining independent stacks for their own cluster sets (removing the need for a consistent network layer terraform can execute on and the security challenges that evokes).  In that world you'd just need to configure the Plural terraform provider from the start and can still utilize our wrapper modules as done above.
+
+
+## Fleet Setup
+
+There's a few common things you'll often need to solve when managing kubernetes.  We've collected a lot of tested setups that you can adapt into your own environments.  In particular, we've provided resources for setting up:
+
+* monitoring - full loki + prometheus agent setup and how to connect them both to your instance of the console
+* OPA policy management - example yaml setup for OPA Gatekeeper and various constraints to meet common important benchmarks. 
