@@ -16,9 +16,9 @@ kind: AsmAuthzPolicySafePattern
 metadata:
   name: asm-policy-v0.0.1-asm-authz-policy-safe-pattern
   labels:
-    policycontroller.gke.io/bundleName: asm-policy-v0.0.1
+    policy.plural.sh/bundleName: asm-policy-v0.0.1
   annotations:
-    policycontroller.gke.io/constraintData: |-
+    policy.plural.sh/constraintData: |-
       "{
         bundleName: 'asm-policy-v0.0.1',
         bundleDisplayName: 'Anthos Service Mesh v0.0.1',

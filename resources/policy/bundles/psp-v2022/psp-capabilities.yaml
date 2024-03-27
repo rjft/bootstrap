@@ -16,9 +16,9 @@ kind: K8sPSPCapabilities
 metadata:
   name: psp-v2022-psp-capabilities
   labels:
-    policycontroller.gke.io/bundleName: psp-v2022
+    policy.plural.sh/bundleName: psp-v2022
   annotations:
-    policycontroller.gke.io/constraintData: |-
+    policy.plural.sh/constraintData: |-
       "{
         bundleName: 'psp-v2022',
         bundleDisplayName: 'Pod Security Policies v2022',

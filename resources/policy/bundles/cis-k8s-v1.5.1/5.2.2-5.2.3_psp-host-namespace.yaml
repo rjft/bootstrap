@@ -16,10 +16,10 @@ kind: K8sPSPHostNamespace
 metadata:
   name: cis-k8s-v1.5.1-psp-host-namespace
   labels:
-    policycontroller.gke.io/bundleName: cis-k8s-v1.5.1
+    policy.plural.sh/bundleName: cis-k8s-v1.5.1
   annotations:
     policycontroller.gke.io/bundleVersion: "202312.1"
-    policycontroller.gke.io/constraintData: |-
+    policy.plural.sh/constraintData: |-
       "{
         bundleName: 'cis-k8s-v1.5.1',
         bundleDisplayName: 'CIS Kubernetes Benchmark v1.5.1',
