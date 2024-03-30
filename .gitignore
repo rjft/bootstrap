@@ -33,7 +33,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-helm-values
 test/helm-values
 
 # IDE
