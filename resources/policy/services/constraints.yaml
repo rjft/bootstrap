@@ -1,0 +1,29 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: opa-constraints
+  namespace: policy
+spec:
+  namespace: policy
+  git:
+    folder: policy/templates
+    ref: main
+  repositoryRef:
+    kind: GitRepository
+    name: bootstrap
+    namespace: policy
+  clusterRef:
+    kind: Cluster
+    name: mgmt
+    namespace: infra
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: GlobalService
+metadata:
+ name: opa-constraints
+ namespace: policy
+spec:
+ serviceRef:
+   name: opa-constraints
+   namespace: policy
+  
