@@ -106,4 +106,5 @@ One other common pattern we anticipate is for separate suborganizations each sha
 There's a few common things you'll often need to solve when managing kubernetes.  We've collected a lot of tested setups that you can adapt into your own environments.  In particular, we've provided resources for setting up:
 
 * monitoring - full loki + prometheus agent setup and how to connect them both to your instance of the console
-* OPA policy management - example yaml setup for OPA Gatekeeper and various constraints to meet common important benchmarks. 
+* OPA policy management - example yaml setup for OPA Gatekeeper and various constraints to meet common important benchmarks.
+* pipelines - a full PR Automation pipeline setup inclusive of using global services as well that should help testdrive some of the more advanced change management capabilities of the platform.

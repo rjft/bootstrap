@@ -1,0 +1,6 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: GitRepository
+metadata:
+  name: demo
+spec:
+  url: https://github.com/pluralsh/pipelines-demo.git
