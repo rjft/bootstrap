@@ -17,14 +17,3 @@ spec:
     kind: Cluster
     name: mgmt
     namespace: infra
----
-apiVersion: deployments.plural.sh/v1alpha1
-kind: GlobalService
-metadata:
- name: opa-constraints
- namespace: policy
-spec:
- serviceRef:
-   name: opa-constraints
-   namespace: policy
-  
