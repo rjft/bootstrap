@@ -5,6 +5,7 @@ metadata:
   namespace: policy
 spec:
   namespace: policy
+  templated: false
   git:
     folder: resources/policy/constraints
     ref: main
