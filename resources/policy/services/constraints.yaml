@@ -6,7 +6,7 @@ metadata:
 spec:
   namespace: policy
   git:
-    folder: resources/policy/templates
+    folder: resources/policy/constraints
     ref: main
   repositoryRef:
     kind: GitRepository
