@@ -20,15 +20,18 @@ external-dns:
         key: PLURAL_ACCESS_TOKEN
 
 plural-certmanager-webhook:
+  enabled: true
   certManager:
     namespace: cert-manager
     serviceAccountName: cert-manager
 
 application:
+  enabled: true
   registry: dkr.plural.sh/bootstrap
   tag: v0.8.3
 
 plural:
+  enabled: true
   image:
     repository: dkr.plural.sh/bootstrap/plural-operator
     tag: 0.5.5
