@@ -15,7 +15,7 @@ variable "create_db" {
 
 variable "kubernetes_version" {
   type = string
-  default = "1.27.3"
+  default = "1.27.9"
 }
 
 variable "create_resource_group" {
@@ -67,6 +67,18 @@ variable "db_sku" {
   default = "GP_Gen5_2"
 }
 
+variable "workload_identity_enabled" {
+  type = bool
+  default = false
+}
+
+variable "postgres_dns_zone" {
+  default = "plrl.postgres.database.azure.com"
+}
+
+variable "network_link_name" {
+  default = "plrl.postgres.com"
+}
 variable "node_pools" {
   type = map(any)
   default = {

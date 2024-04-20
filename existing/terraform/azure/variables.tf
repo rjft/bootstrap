@@ -5,3 +5,7 @@ variable "cluster_name" {
 variable "resource_group" {
   type = string
 }
+
+variable "dns_zone_name" {
+  type = string
+}
