@@ -1,0 +1,7 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: GitRepository
+metadata:
+  name: infra
+  namespace: infra
+spec:
+  url: # your repository url

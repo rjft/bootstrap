@@ -1,0 +1,74 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: console
+  namespace: infra
+spec:
+  namespace: plrl-console
+  helm:
+    version: "0.x.x"
+    chart: console
+    valuesFrom:
+      namespace: infra
+      name: console-values
+    repository:
+      namespace: infra
+      name: console
+  clusterRef:
+    kind: Cluster
+    name: mgmt
+    namespace: infra
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: cert-manager
+  namespace: infra
+spec:
+  namespace: cert-manager
+  git:
+    folder: helm-values
+    ref: main
+  repositoryRef:
+    kind: GitRepository
+    name: infra
+    namespace: infra
+  helm:
+    version: "v1.13.3"
+    chart: cert-manager
+    valuesFiles:
+    - certmanager.yaml
+    repository:
+      namespace: plural-runtime
+      name: cert-manager
+  clusterRef:
+    kind: Cluster
+    name: mgmt
+    namespace: infra
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: plrl-runtime
+  namespace: infra
+spec:
+  namespace: plrl-runtime
+  git:
+    folder: helm-values
+    ref: main
+  repositoryRef:
+    kind: GitRepository
+    name: infra
+    namespace: infra
+  helm:
+    version: "0.x.x"
+    chart: runtime
+    valuesFiles:
+    - certmanager.yaml
+    repository:
+      namespace: infra
+      name: bootstrap
+  clusterRef:
+    kind: Cluster
+    name: mgmt
+    namespace: infra

@@ -1,4 +1,3 @@
-{{ if .Values.flux2.enabled }}
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
@@ -18,8 +17,23 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
+  name: bootstrap
+spec:
+  interval: 5m0s
+  url: https://pluralsh.github.io/bootstrap
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: console
+spec:
+  interval: 5m0s
+  url: https://pluralsh.github.io/console
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
   name: flux
 spec:
   interval: 5m0s
   url: https://fluxcd-community.github.io/helm-charts
-{{ end }}

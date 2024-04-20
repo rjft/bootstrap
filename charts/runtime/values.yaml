@@ -25,6 +25,9 @@ plural-certmanager-webhook:
     namespace: cert-manager
     serviceAccountName: cert-manager
 
+operator:
+  enabled: true
+
 application:
   enabled: true
   registry: dkr.plural.sh/bootstrap
