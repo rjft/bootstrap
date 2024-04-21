@@ -1,4 +1,4 @@
-## Bootstrapping an empty existing cluster
+# Bootstrapping from an Empty Existing Cluster
 
 This will guide teams new to kubernetes how to setup a fresh cluster with what's needed to install your instance of the Plural console. There are three main things we're going to try to get into this cluster:
 
@@ -12,7 +12,7 @@ You'll need to do a few things to get set up:
 
 * Install cloud prereqs via terraform
 * install cert-manager and our runtime chart via helm
-* install console via helm
+* install Plural Console via helm
 * set up a bootstrapping Plural service to subscribe to future updates
 
 To do all this, you'll want to create your own git repo to copy code into and keep a record of what's been done.  None of the code will require committing any secrets.
@@ -56,7 +56,7 @@ The helm commands to run once those files have been copied and modified and you 
 helm repo add jetstack https://charts.jetstack.io || helm repo update
 helm repo add plrl-bootstrap https://pluralsh.github.io/bootstrap || helm repo update
 helm upgrade --install --create-namespace cert-manager jetstack/cert-manager -f helm-values/certmanager.yaml -n cert-manager
-helm upgrade --install --create-namespace plrl-runtime plrl-bootstrap/runtime -f helm-values/runtime.yaml
+helm upgrade --install --create-namespace plrl-runtime plrl-bootstrap/runtime -f helm-values/runtime.yaml -n plrl-runtime
 ```
 
 ## Install the Plural Console
@@ -70,18 +70,25 @@ plural cd control-plane
 
 You might need to install the plural cli, which is available on homebrew via: `brew install pluralsh/plural/plural`
 
-The `plural cd control-plane` command generates the helm values you need to install the plural console, which will then be applied with:
+The `plural cd control-plane` command generates the helm values you need to install the plural console to a file `values.secret.yaml`, which will then be applied with:
 
 ```sh
 helm repo add plrl-console https://pluralsh.github.io/console
 helm upgrade --install --create-namespace -f values.secret.yaml console plrl-console/console -n plrl-console
 ```
 
+Note the secret in that filename is not incidental, you will definitely want to avoid committing that file, and the subsequent steps will detail how to securely manage it.
+
+To track rollout status, you can run `kubectl get pods -n plrl-console`. It might take a bit of time for the initial db migrations to complete, so you'll see some things error until that happens.  You can also run `kubectl get certificate -n plrl-console` to verify that all certs were issued before finally visiting the url of your console.
+
 ## Setup Continuous Updates
 
-From there, you'll want to copy the `existing/setup` folder to your working git repository, add that git repository to the plural console by navigating to the ui at `https://{your-console-url}/cd/repos`.  From there, you'll want to first save your values file as a k8s secret:
+From there, you'll want to copy the `existing/setup` folder to your working git repository, add that git repository to the plural console by navigating to the ui at `https://{your-console-url}/cd/repos`.  NOTE: you'll want to update the url of `existing/setup/gitrepository.yaml`.
+
+From there, you'll want to first save your values file as a k8s secret:
 
 ```sh
+kubectl create ns infra
 kubectl create secret generic console-values --from-file=values.yaml=values.secret.yaml -n infra
 ```
 
@@ -97,3 +104,5 @@ Folder:     existing/setup
 ```
 
 These can all be entered in our UI for simplicity, and from there, you can use your git repository to GitOps freely.
+
+Once this is complete, we strongly recommend you keep the `values.secret.yaml` file somewhere safe in case you need it in the future, although it'll also be stored securely in the k8s secret we just created as well. Do not commit it to the repo.

@@ -4,4 +4,4 @@ metadata:
   name: infra
   namespace: infra
 spec:
-  url: # your repository url
+  url: YOUR_REPOSITORY_URL

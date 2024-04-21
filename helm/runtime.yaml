@@ -1,0 +1,41 @@
+cert-manager:
+  enabled: false
+
+ownerEmail: notifications@plural.sh # change this to whatever email you want to receive cert notifs
+
+plural:
+  enabled: false
+
+operator:
+  enabled: false
+
+flux2:
+  enabled: false
+
+flux:
+  enabled: false
+
+external-dns:
+  enabled: true
+  serviceAccount:
+    name: externaldns
+    annotations:
+      plural.sh/dummy: ignore
+      # azure.workload.identity/client-id: 027c5496-d46b-40d3-8f92-a0f44dcf3500 # uncomment and update for azure
+
+  podLabels:
+    azure.workload.identity/use: "true"
+
+  txtOwnerId: plrl
+
+  provider: azure # <- change to the provider you actually wish to use
+
+  domainFilters:
+  - az.plural.sh # <- you need to change this
+
+  # For azure
+  # azure:
+  #   useWorkloadIdentityExtension: true
+  #   resourceGroup: <YOUR_RESOURCE_GROUP>
+  #   tenantId: <YOUR_TENANT_ID>
+  #   subscriptionId: <YOUR_SUBSCRIPTION_ID>
