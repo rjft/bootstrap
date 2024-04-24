@@ -100,9 +100,9 @@ Name:       setup
 Cluster:    <management-cluster>
 Repository: <your-repository-url>
 Branch:     main
-Folder:     existing/setup
+Folder:     <your-setup-folder>
 ```
 
 These can all be entered in our UI for simplicity, and from there, you can use your git repository to GitOps freely.
 
-Once this is complete, we strongly recommend you keep the `values.secret.yaml` file somewhere safe in case you need it in the future, although it'll also be stored securely in the k8s secret we just created as well. Do not commit it to the repo.
+Once this is complete, we strongly recommend you keep the `values.secret.yaml` file somewhere safe in case you need it in the future, although it'll also be stored securely in the k8s secret we just created as well. *Do not commit it to the repo.*
