@@ -64,7 +64,7 @@ spec:
     version: "0.x.x"
     chart: runtime
     valuesFiles:
-    - certmanager.yaml
+    - runtime.yaml
     repository:
       namespace: infra
       name: bootstrap

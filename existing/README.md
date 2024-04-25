@@ -17,6 +17,14 @@ You'll need to do a few things to get set up:
 
 To do all this, you'll want to create your own git repo to copy code into and keep a record of what's been done.  None of the code will require committing any secrets.
 
+To setup your repo you'll want to copy the following folders in your fresh git repo:
+
+* terraform/clouds/{cloud} -> terraform/mgmt
+* existing/terraform/{cloud} -> terraform/externaldns
+* exsting/test/{cloud}/*.tf -> terraform/*.tf (you'll need to rewire the `source` fields for the modules and make variable name changes)
+* existing/setup -> setup
+* helm -> helm-values
+
 ## Installing Cloud Prereqs
 
 Within the `terraform/{cloud}` folders here, there are simple terraform stacks to set up the needed cloud resources.  These are usually IAM bindings.  You can reference `test/{cloud}` to see how they're used, and if you want you can use our terraform to set up our cluster as well.  You'll want to first copy the relevant terraform code into a working folder in your git repo, we'd recommend just naming it `/terraform`, then run:
@@ -100,7 +108,7 @@ Name:       setup
 Cluster:    <management-cluster>
 Repository: <your-repository-url>
 Branch:     main
-Folder:     <your-setup-folder>
+Folder:     setup
 ```
 
 These can all be entered in our UI for simplicity, and from there, you can use your git repository to GitOps freely.
