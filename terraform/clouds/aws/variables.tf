@@ -9,12 +9,12 @@ variable "db_name" {
 }
 
 variable "db_storage" {
-  type = number
+  type    = number
   default = 20
 }
 
 variable "postgres_vsn" {
-  type = string
+  type    = string
   default = "14"
 }
 
@@ -59,7 +59,7 @@ variable "deletion_protection" {
 }
 
 variable "backup_retention_period" {
-  type = number
+  type    = number
   default = 7
 }
 
@@ -75,10 +75,10 @@ variable "node_group_defaults" {
       {
         device_name = "/dev/xvda"
         ebs = {
-          volume_size = 50
-          volume_type = "gp3"
+          volume_size           = 50
+          volume_type           = "gp3"
           delete_on_termination = true
-          encrypted = true
+          encrypted             = true
         }
       }
     ]
@@ -99,11 +99,22 @@ variable "managed_node_groups" {
 }
 
 variable "create_cloudwatch_log_group" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "monitoring_role" {
-  type = string
+  type    = string
   default = ""
+}
+
+variable "certmanager_serviceaccount" {
+  type        = string
+  default     = "certmanager"
+  description = "name of the certmanager service account"
+}
+
+variable "namespace" {
+  type    = string
+  default = "bootstrap"
 }
