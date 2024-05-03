@@ -24,7 +24,8 @@ resource "aws_iam_policy" "certmanager" {
           "Effect": "Allow",
           "Action": [
             "route53:ChangeResourceRecordSets",
-            "route53:ListResourceRecordSets"
+            "route53:ListResourceRecordSets",
+            "route53:ListHostedZones"
           ],
           "Resource": "arn:aws:route53:::hostedzone/*"
         },
