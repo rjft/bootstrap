@@ -11,15 +11,6 @@ output "db_password" {
   sensitive = true
 }
 
-resource "aws_secretsmanager_secret" "db_password_secret" {
-  name = "DB_Password_Secret_${local.db_name}"
-}
-
-resource "aws_secretsmanager_secret_version" "db_password" {
-  secret_id     = aws_secretsmanager_secret.db_password_secret.id
-  secret_string = random_password.password.result
-}
-
 module "db" {
   create_db_instance = var.create_db
   source             = "terraform-aws-modules/rds/aws"
