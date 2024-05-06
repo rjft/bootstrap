@@ -6,11 +6,6 @@ resource "random_password" "password" {
   special     = false
 }
 
-output "db_password" {
-  value     = random_password.password.result
-  sensitive = true
-}
-
 module "db" {
   create_db_instance = var.create_db
   source             = "terraform-aws-modules/rds/aws"
