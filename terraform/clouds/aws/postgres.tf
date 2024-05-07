@@ -8,25 +8,25 @@ resource "random_password" "password" {
 
 module "db" {
   create_db_instance = var.create_db
-  source             = "terraform-aws-modules/rds/aws"
-  version            = "~> 6.3"
+  source = "terraform-aws-modules/rds/aws"
+  version = "~> 6.3"
 
   identifier = local.db_name
 
   engine               = "postgres"
   engine_version       = var.postgres_vsn
   family               = "postgres14"
-  major_engine_version = var.postgres_vsn
+  major_engine_version = var.postgres_vsn 
   instance_class       = var.db_instance_class
   allocated_storage    = var.db_storage
 
-  db_name                     = "console"
-  username                    = "console"
-  password                    = random_password.password.result
+  db_name  = "console"
+  username = "console"
+  password = random_password.password.result
   manage_master_user_password = false
 
-  maintenance_window      = "Mon:00:00-Mon:03:00"
-  backup_window           = "03:00-06:00"
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
   backup_retention_period = var.backup_retention_period
 
   monitoring_interval    = "30"

@@ -10,9 +10,9 @@ output "cluster_arn" {
 output "cluster" {
   description = "thin object representing the clusters info"
   value = {
-    cluster_arn                        = module.eks.cluster_arn
-    cluster_name                       = module.eks.cluster_name
-    cluster_endpoint                   = module.eks.cluster_endpoint
+    cluster_arn = module.eks.cluster_arn
+    cluster_name = module.eks.cluster_name
+    cluster_endpoint = module.eks.cluster_endpoint
     cluster_certificate_authority_data = module.eks.cluster_certificate_authority_data
   }
 }
@@ -217,19 +217,19 @@ output "self_managed_node_groups_autoscaling_group_names" {
 }
 
 output "vpc" {
-  value = module.vpc
+    value = module.vpc
 }
 
 output "db" {
-  value     = module.db
-  sensitive = true
+    value = module.db
+    sensitive = true
 }
 
 output "db_url" {
-  value     = local.db_url
-  sensitive = true
+    value = local.db_url
+    sensitive = true
 }
 
 output "ready" {
-  value = local.cluster_ready
+    value = local.cluster_ready
 }
