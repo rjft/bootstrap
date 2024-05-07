@@ -2,8 +2,8 @@ module "assumable_role_certmanager" {
   source           = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version          = "3.14.0"
   create_role      = true
-  role_name        = "${var.cluster_name}-certmanager"
-  provider_url     = replace(local.cluster_oidc_issuer_url, "https://", "")
+  role_name        = "${var.cluster_name}-certmanager-extdns"
+  provider_url     = var.cluster_oidc_issuer_arn
   role_policy_arns = [aws_iam_policy.certmanager.arn]
   oidc_fully_qualified_subjects = [
     "system:serviceaccount:${var.externaldns_namespace}:${var.externaldns_serviceaccount}",

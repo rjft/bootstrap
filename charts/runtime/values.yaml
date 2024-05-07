@@ -156,6 +156,7 @@ ingress-nginx:
       enabled: false
     service:
       annotations:
+        service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
         service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     config:
       worker-shutdown-timeout: 240s
