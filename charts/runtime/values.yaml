@@ -165,6 +165,9 @@ ingress-nginx:
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
         service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
     config:
+      compute-full-forwarded-for: 'true'
+      use-forwarded-headers: 'true'
+      use-proxy-protocol: 'true'
       worker-shutdown-timeout: 240s
       proxy-body-size: '0'
       proxy-read-timeout: '3600'
